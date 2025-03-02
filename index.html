@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Srishti AI - Gallery of AI generated videos in various aspect ratios. Explore creative AI-generated content in 1:1, 16:9, and 9:16 formats."
+    />
+    <meta
+      name="keywords"
+      content="AI videos, artificial intelligence videos, AI content, Srishti AI, video gallery, AI-generated content"
+    />
+    <meta name="author" content="Srishti AI" />
+    <meta
+      property="og:title"
+      content="Srishti AI - AI Generated Video Gallery"
+    />
+    <meta
+      property="og:description"
+      content="Explore an amazing collection of AI generated videos in various aspect ratios. Creative content powered by artificial intelligence."
+    />
+    <meta property="og:image" content="/preview.jpg" />
+    <meta property="og:url" content="https://srishti.ai" />
+    <meta property="og:type" content="website" />
+    <title>Srishti AI - AI Generated Video Gallery</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #8c52ff;
+        --primary-hover: #7540e2;
+        --background-dark: #0f0f0f;
+        --background-card: #1a1a1a;
+        --background-hover: #252525;
+        --text-primary: #ffffff;
+        --text-secondary: #aaaaaa;
+        --border-color: #333333;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--background-dark);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        background-color: var(--background-dark);
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        z-index: 1000;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .logo span {
+        background: linear-gradient(90deg, #8c52ff 0%, #ff52a2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .search-bar {
+        display: flex;
+        flex: 0 1 40%;
+        position: relative;
+      }
+
+      .search-bar input {
+        flex: 1;
+        padding: 0.7rem 1rem;
+        border-radius: 24px;
+        border: 1px solid var(--border-color);
+        background-color: #202020;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+      }
+
+      .search-bar button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 24px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-hover);
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      main {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      .filters {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        scrollbar-width: thin;
+      }
+
+      .filters::-webkit-scrollbar {
+        height: 4px;
+      }
+
+      .filters::-webkit-scrollbar-thumb {
+        background-color: var(--border-color);
+        border-radius: 4px;
+      }
+
+      .filter-btn {
+        background-color: var(--background-card);
+        color: var(--text-primary);
+        border: none;
+        border-radius: 24px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background-color: var(--primary-color);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .see-all {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .video-card {
+        cursor: pointer;
+        transition: transform 0.2s;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: var(--background-card);
+      }
+
+      .video-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .video-container.landscape {
+        aspect-ratio: 16/9;
+      }
+
+      .video-container.square {
+        aspect-ratio: 1/1;
+      }
+
+      .video-container.portrait {
+        aspect-ratio: 9/16;
+      }
+
+      .video-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      footer {
+        background-color: var(--background-card);
+        padding: 2rem 1rem;
+        margin-top: 2rem;
+      }
+
+      .footer-content {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+      }
+
+      .footer-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-color);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+        transition: color 0.2s;
+      }
+
+      .social-links a:hover {
+        color: var(--primary-color);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        border-top: 1px solid var(--border-color);
+        margin-top: 2rem;
+      }
+
+      .aspect-ratio-toggle {
+        margin: 1rem 0 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .aspect-ratio-toggle button {
+        background-color: var(--background-card);
+        color: var(--text-secondary);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .aspect-ratio-toggle button:hover,
+      .aspect-ratio-toggle button.active {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--background-dark);
+        z-index: 1500;
+        padding: 2rem;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .mobile-menu.active {
+        transform: translateX(0);
+      }
+
+      .mobile-menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .mobile-menu-close {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .mobile-menu-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .mobile-menu-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .mobile-search {
+        margin: 1.5rem 0;
+      }
+
+      .mobile-search input {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border-radius: 24px;
+        border: 1px solid var(--border-color);
+        background-color: #202020;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .search-bar {
+          display: none;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .video-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 1rem;
+        }
+      }
+
+      /* Loader animation */
+      .loader-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--background-dark);
+        z-index: 9999;
+        transition: opacity 0.5s, visibility 0.5s;
+      }
+
+      .loader {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-top-color: var(--primary-color);
+        animation: spin 1s infinite linear;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.3) 0%,
+          rgba(0, 0, 0, 0) 50%
+        );
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loader Animation -->
+    <div class="loader-container" id="loader">
+      <div class="loader"></div>
+    </div>
+
+    <header>
+      <div class="navbar">
+        <a href="#" class="logo">
+          <i class="fas fa-play-circle"></i>
+          <span>Srishti</span> AI
+        </a>
+
+        <div class="search-bar">
+          <input type="text" placeholder="Search AI-generated videos..." />
+          <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="nav-links">
+          <a href="#"><i class="fas fa-home"></i></a>
+          <a href="#"><i class="fas fa-compass"></i></a>
+          <a href="#"><i class="fas fa-bell"></i></a>
+          <a href="mailto:dearabhin@gmail.com"
+            ><i class="fas fa-user-circle"></i
+          ></a>
+          <button class="btn-primary">Upload</button>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-open">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <div class="filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Animation</button>
+        <button class="filter-btn">Landscapes</button>
+        <button class="filter-btn">Portraits</button>
+        <button class="filter-btn">Abstract</button>
+        <button class="filter-btn">Nature</button>
+        <button class="filter-btn">Urban</button>
+        <button class="filter-btn">Science Fiction</button>
+        <button class="filter-btn">Fantasy</button>
+        <button class="filter-btn">Technology</button>
+        <button class="filter-btn">Experimental</button>
+      </div>
+
+      <div class="aspect-ratio-toggle">
+        <button class="active" data-ratio="all">All Formats</button>
+        <button data-ratio="landscape">Landscape (16:9)</button>
+        <button data-ratio="square">Square (1:1)</button>
+        <button data-ratio="portrait">Portrait (9:16)</button>
+      </div>
+
+      <div class="section-title">
+        <h2>Featured Creations</h2>
+        <a href="#" class="see-all">See all</a>
+      </div>
+
+      <div class="video-grid">
+        <!-- Landscape videos (16:9) -->
+        <div class="video-card" data-ratio="landscape">
+          <div class="video-container landscape">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (9).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="landscape">
+          <div class="video-container landscape">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (10).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <!-- Square videos (1:1) -->
+        <div class="video-card" data-ratio="square">
+          <div class="video-container square">
+            <video autoplay loop muted playsinline>
+              <source src="mechanic_sqr.mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="square">
+          <div class="video-container square">
+            <video autoplay loop muted playsinline>
+              <source src="ocean_waves.mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <!-- Portrait videos (9:16) -->
+        <div class="video-card" data-ratio="portrait">
+          <div class="video-container portrait">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (8).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="portrait">
+          <div class="video-container portrait">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (12).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>Popular</h2>
+        <a href="#" class="see-all">See all</a>
+      </div>
+
+      <div class="video-grid">
+        <div class="video-card" data-ratio="landscape">
+          <div class="video-container landscape">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (6).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="square">
+          <div class="video-container square">
+            <video autoplay loop muted playsinline>
+              <source src="cat_square.mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="portrait">
+          <div class="video-container portrait">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (5).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="landscape">
+          <div class="video-container landscape">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (17).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>Recently Added</h2>
+        <a href="#" class="see-all">See all</a>
+      </div>
+
+      <div class="video-grid">
+        <div class="video-card" data-ratio="landscape">
+          <div class="video-container landscape">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (3).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="square">
+          <div class="video-container square">
+            <video autoplay loop muted playsinline>
+              <source src="cat_square.mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="portrait">
+          <div class="video-container portrait">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (15).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+
+        <div class="video-card" data-ratio="landscape">
+          <div class="video-container landscape">
+            <video autoplay loop muted playsinline>
+              <source src="video_ (2).mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Srishti AI</h3>
+          <p>
+            Exploring the creative potential of artificial intelligence through
+            short-form video content.
+          </p>
+          <div class="social-links">
+            <a href="https://x.com/dearabhin"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/abhin.io"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="https://youtube.com/@abhinkrishna"
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <a href="https://t.me/abhin_krishna"
+              ><i class="fab fa-telegram"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="mailto:dearabhin@gmail.com">Contact</a></li>
+            <li><a href="mailto:dearabhin@gmail.com">Buy Now</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul class="footer-links">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">API Documentation</a></li>
+            <li><a href="#">Community Guidelines</a></li>
+            <li><a href="#">Creator Program</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <ul class="footer-links">
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Copyright</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2025 Srishti AI. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-menu-header">
+        <a href="#" class="logo">
+          <i class="fas fa-play-circle"></i>
+          <span>Srishti</span> AI
+        </a>
+        <button class="mobile-menu-close" id="mobile-menu-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="mobile-search">
+        <input type="text" placeholder="Search AI-generated videos..." />
+      </div>
+
+      <div class="mobile-menu-links">
+        <a href="#"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-compass"></i> Explore</a>
+        <a href="#"><i class="fas fa-fire"></i> Trending</a>
+        <a href="#"><i class="fas fa-upload"></i> Upload</a>
+        <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+        <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+      </div>
+    </div>
+
+    <script>
+      // Hide loader when page is loaded
+      window.addEventListener("load", function () {
+        const loader = document.getElementById("loader");
+        setTimeout(() => {
+          loader.style.opacity = "0";
+          setTimeout(() => {
+            loader.style.display = "none";
+          }, 500);
+        }, 1000);
+      });
+
+      // Mobile menu toggle
+      document
+        .getElementById("mobile-menu-open")
+        .addEventListener("click", function () {
+          document.getElementById("mobile-menu").classList.add("active");
+        });
+
+      document
+        .getElementById("mobile-menu-close")
+        .addEventListener("click", function () {
+          document.getElementById("mobile-menu").classList.remove("active");
+        });
+
+      // Aspect ratio filter functionality
+      const aspectRatioButtons = document.querySelectorAll(
+        ".aspect-ratio-toggle button"
+      );
+      const videoCards = document.querySelectorAll(".video-card");
+
+      aspectRatioButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const ratio = this.getAttribute("data-ratio");
+
+          // Toggle active class on buttons
+          aspectRatioButtons.forEach((btn) => btn.classList.remove("active"));
+          this.classList.add("active");
+
+          // Filter videos
+          videoCards.forEach((card) => {
+            if (ratio === "all") {
+              card.style.display = "block";
+            } else {
+              if (card.getAttribute("data-ratio") === ratio) {
+                card.style.display = "block";
+              } else {
+                card.style.display = "none";
+              }
+            }
+          });
+        });
+      });
+
+      // Lazy loading for videos
+      const lazyLoadVideos = () => {
+        const videos = document.querySelectorAll("video");
+        const options = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.1,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const video = entry.target;
+              if (video.paused) {
+                video.play().catch((error) => {
+                  console.log("Auto-play was prevented:", error);
+                });
+              }
+              observer.unobserve(video);
+            } else {
+              const video = entry.target;
+              if (!video.paused) {
+                video.pause();
+              }
+            }
+          });
+        }, options);
+
+        videos.forEach((video) => {
+          observer.observe(video);
+        });
+      };
+
+      // Call the lazy load function
+      document.addEventListener("DOMContentLoaded", lazyLoadVideos);
+
+      // Category filter functionality
+      const filterButtons = document.querySelectorAll(".filter-btn");
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          filterButtons.forEach((btn) => btn.classList.remove("active"));
+          this.classList.add("active");
+
+          // Here you would typically filter videos by category
+          // This is a simplified version without actual filtering
+        });
+      });
+    </script>
+  </body>
+</html>
